@@ -29,6 +29,10 @@
             {
                 "command": "capitalcase",
                 "title": "To capitalcase"
+            },
+            {
+                "command": "reversewords",
+                "title": "Reverse words"
             }
         ]
     },

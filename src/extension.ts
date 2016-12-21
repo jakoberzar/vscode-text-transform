@@ -1,11 +1,12 @@
 import {ExtensionContext, window, commands, Selection, Range, TextEditorEdit} from "vscode";
 import Transformation from "./transformation";
-import {UppercaseTransformer, LowercaseTransformer, CapitalcaseTransformer} from "./simple-transformations";
+import {UppercaseTransformer, LowercaseTransformer, CapitalcaseTransformer, ReverseWordsTransformer} from "./simple-transformations";
 
 export const transformers = new Array<Transformation>();
 transformers.push(new UppercaseTransformer());
 transformers.push(new LowercaseTransformer());
 transformers.push(new CapitalcaseTransformer());
+transformers.push(new ReverseWordsTransformer());
 
 //This is needed to be able to inject a spy transformer during testing
 let context: ExtensionContext;

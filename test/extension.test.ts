@@ -54,7 +54,7 @@ suite("integration test", () => {
 
 
 
-import {CapitalcaseTransformer} from "../src/simple-transformations";
+import {CapitalcaseTransformer, ReverseWordsTransformer} from "../src/simple-transformations";
 
 suite("unit tests", () => {
     suite("capitalcase", () => {
@@ -64,6 +64,27 @@ suite("unit tests", () => {
         test("correct handling of multiword input", (done: MochaDone) => {
             instance.transform(SAMPLE_SENTENCE, (output: string) => {
                 assert.equal(output, "Hallo\tWelt,\nIch Freue   Mich!");
+                done();
+            });
+        });
+    });
+    
+    suite("reversewords", () => {
+        let instance = new ReverseWordsTransformer();
+        const SAMPLE_CODE_USE = "foo === true";
+        const SAMPLE_MULTILINE_SENTENCE = "\t\tThis is some text\n    And some in new line!";
+
+        test("correct handling of operators", (done: MochaDone) => {
+            instance.transform(SAMPLE_CODE_USE, (output: string) => {
+                assert.equal(output, "true === foo");
+                done();
+            });
+        });
+
+        // We want to reverse only words in line, and preserve indentation across multiple lines
+        test("correct handling of multiline input", (done: MochaDone) => {
+            instance.transform(SAMPLE_MULTILINE_SENTENCE, (output: string) => {
+                assert.equal(output, "\t\ttext some is This\n    line! new in some And");
                 done();
             });
         });
